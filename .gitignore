@@ -1,0 +1,13 @@
+*.bak
+*.lock
+*.pyc
+*.swp
+*~
+.directory
+.DS_Store
+dein/*
+doc/tags
+doc/tags-ja
+fakesrc/*
+ftplugin/*
+scripts/*
