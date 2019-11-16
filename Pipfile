@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+flake8 = "*"
+flake8-import-order = "*"
+autopep8 = "*"
+isort = "*"
+black = "*"
+
+[packages]
+neovim = "*"
+pynvim = "*"
+
+[requires]
+python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
