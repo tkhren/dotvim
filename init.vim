@@ -200,7 +200,8 @@ function! s:load_my_plugins(dein_repository, dein_base_dir) abort "{{{1
         call dein#add('LeafCage/yankround.vim')
         call dein#add('tpope/vim-speeddating')
         call dein#add('AndrewRadev/switch.vim')
-        call dein#add('tkhren/vim-substy')
+        " call dein#add('tkhren/vim-substy')
+        call dein#add(expand('$HOME/Dropbox/Projects/vim-substy'))
 
         "" TEXT OBJECT
         ""---------------
@@ -424,24 +425,16 @@ function! s:load_my_plugins(dein_repository, dein_base_dir) abort "{{{1
     endif
     "}}}2
     if dein#tap('vim-substy') "{{{2
-        let g:substy#template_force_offset = ''
-        nmap <expr> [sub]s substy#template('', '')
-        vmap <expr> [sub]s substy#template('', '')
-        nmap <expr> [sub]/ substy#template(@/, '')
-        vmap <expr> [sub]/ substy#template(@/, '')
-        nmap <expr> [sub]? substy#template(@/, @/)
-        vmap <expr> [sub]? substy#template(@/, @/)
-        nmap <expr> [sub]y substy#yank()
-        vmap <expr> [sub]y substy#yank()
-        nmap <expr> [sub]U substy#yank({i,v -> toupper(v)})
-        vmap <expr> [sub]U substy#yank({i,v -> toupper(v)})
-        nmap <expr> [sub]u substy#yank({i,v -> tolower(v)})
-        vmap <expr> [sub]U substy#yank({i,v -> toupper(v)})
-        nmap <expr> [sub] substy#template_operator()
+        map <expr> [sub]s substy#template_m('', '')
+        map <expr> [sub]v substy#template_v('', '')
+        map <expr> [sub]U substy#template(@/, '\=toupper(submatch(0))')
+        map <expr> [sub]/ substy#template(@/, '')
+        map <expr> [sub]? substy#template(@/, @/)
+        map <expr> [sub]y substy#yank()
+        nmap <expr> [sub] substy#template_m_operator()
         for c in split('abcdefghijklmnopqrstuvwxyz0123456789*+.%/"', '\zs')
-            let mapcmd = '%s <expr> [sub]"%s substy#template(escape(@%s, "\\.*^$[~/"), "")'
-            exec printf(mapcmd, 'nmap', c, c)
-            exec printf(mapcmd, 'vmap', c, c)
+            let mapcmd = 'map <expr> [sub]"%s substy#template_m(@%s, "")'
+            exec printf(mapcmd, c, c)
         endfor
     endif
     "}}}2
