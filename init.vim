@@ -425,15 +425,15 @@ function! s:load_my_plugins(dein_repository, dein_base_dir) abort "{{{1
     endif
     "}}}2
     if dein#tap('vim-substy') "{{{2
-        map <expr> [sub]s substy#template_m('', '')
-        map <expr> [sub]v substy#template_v('', '')
-        map <expr> [sub]U substy#template(@/, '\=toupper(submatch(0))')
-        map <expr> [sub]/ substy#template(@/, '')
-        map <expr> [sub]? substy#template(@/, @/)
-        map <expr> [sub]y substy#yank()
-        nmap <expr> [sub] substy#template_m_operator()
+        no <expr> [sub]s substy#template_m('', '')
+        no <expr> [sub]v substy#template_v('', '')
+        no <expr> [sub]U substy#template(@/, '\=toupper(submatch(0))')
+        no <expr> [sub]/ substy#template(@/, '')
+        no <expr> [sub]? substy#template(@/, @/)
+        no <expr> [sub]y substy#yank()
+        nn <expr> [sub] substy#template_m_operator()
         for c in split('abcdefghijklmnopqrstuvwxyz0123456789*+.%/"', '\zs')
-            let mapcmd = 'map <expr> [sub]"%s substy#template_m(@%s, "")'
+            let mapcmd = 'no <expr> [sub]"%s substy#template_m(@%s, "")'
             exec printf(mapcmd, c, c)
         endfor
     endif
